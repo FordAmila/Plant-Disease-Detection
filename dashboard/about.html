@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Plant Disease Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .modal-container {
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, rgba(27,94,32,0.9), rgba(46,125,50,0.8));
+            padding: 24px 28px;
+            border-radius: 28px 28px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-header h2 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header h2 i {
+            color: #4CAF50;
+        }
+
+        .close-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid #4CAF50;
+            padding-left: 12px;
+        }
+
+        .about-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .tech-badge {
+            background: rgba(76,175,80,0.2);
+            border: 1px solid rgba(76,175,80,0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #4CAF50;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .stat-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+        }
+
+        .credits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .credit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .credit-item:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .credit-item i {
+            font-size: 1.3rem;
+            color: #4CAF50;
+            width: 40px;
+        }
+
+        .credit-item .credit-text h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .credit-item .credit-text p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .btn-close {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46,125,50,0.4);
+        }
+
+        .modal-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .modal-container::-webkit-scrollbar-thumb {
+            background: rgba(76,175,80,0.5);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2><i class="fas fa-info-circle"></i> About</h2>
+            <button class="close-btn" onclick="window.close()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="section">
+                <div class="section-title"><i class="fas fa-microchip"></i> About the System</div>
+                <div class="about-content">
+                    <p><strong>Plant Disease Detector</strong> is an AI-powered web application that helps farmers, gardeners, and plant enthusiasts identify plant diseases quickly and accurately using just a photo of the affected leaf.</p>
+                    <p>Powered by the EfficientNetB4 deep learning model trained on over 61,000 images across 38 disease classes and 14 plant species, the system provides instant diagnosis with confidence scores and detailed treatment recommendations.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fas fa-brain"></i> EfficientNetB4</span>
+                        <span class="tech-badge"><i class="fab fa-python"></i> TensorFlow</span>
+                        <span class="tech-badge"><i class="fas fa-chart-line"></i> 92% Accuracy</span>
+                        <span class="tech-badge"><i class="fas fa-database"></i> 61K+ Images</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title"><i class="fas fa-chart-bar"></i> Key Statistics</div>
+                <div class="stats-grid">
+                    <div class="stat-box"><div class="stat-number">38</div><div class="stat-label">Disease Classes</div></div>
+                    <div class="stat-box"><div class="stat-number">14</div><div class="stat-label">Plant Species</div></div>
+                    <div class="stat-box"><div class="stat-number">92%</div><div class="stat-label">Accuracy Rate</div></div>
+                    <div class="stat-box"><div class="stat-number">61K+</div><div class="stat-label">Training Images</div></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title"><i class="fas fa-database"></i> Dataset Information</div>
+                <div class="about-content">
+                    <p>The model was trained on the <strong>PlantVillage dataset</strong> with additional augmentation techniques:</p>
+                    <div class="tech-stack" style="margin-top: 12px;">
+                        <span class="tech-badge"> Image Flipping</span>
+                        <span class="tech-badge"> Gamma Correction</span>
+                        <span class="tech-badge"> PCA Color Augmentation</span>
+                        <span class="tech-badge"> Rotation</span>
+                        <span class="tech-badge"> Scaling</span>
+                        <span class="tech-badge"> Noise Injection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title"><i class="fas fa-users"></i> Credits</div>
+                <div class="credits-list">
+                    <div class="credit-item">
+                        <i class="fas fa-brain"></i>
+                        <div class="credit-text">
+                            <h4>AI Model</h4>
+                            <p>EfficientNetB4 architecture pre-trained on ImageNet</p>
+                        </div>
+                    </div>
+                    <div class="credit-item">
+                        <i class="fas fa-database"></i>
+                        <div class="credit-text">
+                            <h4>Dataset</h4>
+                            <p>PlantVillage Dataset from Mendeley Data</p>
+                        </div>
+                    </div>
+                    <div class="credit-item">
+                        <i class="fas fa-microscope"></i>
+                        <div class="credit-text">
+                            <h4>Treatment Database</h4>
+                            <p>Compiled from agricultural research and plant pathology sources</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content" style="text-align: center;">
+                <p><i class="fas fa-code-branch"></i> Version 1.0 | <i class="far fa-calendar-alt"></i> 2026</p>
+                <p style="font-size: 0.75rem; margin-top: 8px;">© Plant Disease Detector | AI for Agriculture</p>
+            </div>
+
+            <button class="btn-close" onclick="window.close()"><i class="fas fa-check-circle"></i> Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            }
+        });
+        
+        // Close when clicking outside the modal
+        document.body.addEventListener('click', function(e) {
+            if (e.target === document.body) {
+                window.close();
+            }
+        });
+    </script>
+</body>
+</html>
