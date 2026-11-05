@@ -1,3 +1,5 @@
+## Summary
+
 # Plant Disease Detection 🌿🔍
 
 A web application and dashboard designed to detect and classify plant diseases using deep learning. 
